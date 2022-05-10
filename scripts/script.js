@@ -181,7 +181,7 @@ function calculate(input) {
       }
 
 
-    }else{
+    } else {
 
       switch (element) {
         case '+':
@@ -192,8 +192,8 @@ function calculate(input) {
             secondValue = prevOperator + nextOperator;
             res.value = secondValue;
             //currentyElement = '/';
-  
-  
+
+
           } else {
             indexOperator = arrayNumber.indexOf(element);
             prevOperator = Number(arrayNumber.slice(indexOperator - 1, indexOperator));
@@ -202,7 +202,7 @@ function calculate(input) {
             res.value = secondValue;
             // arrayRemoved = arrayNumber.splice(indexOperator -1, 3, firstValue);
             //currentyElement = '/';
-  
+
           }
           break;
         case '-':
@@ -213,8 +213,8 @@ function calculate(input) {
             secondValue = prevOperator - nextOperator;
             res.value = secondValue;
             //currentyElement = '/';
-  
-  
+
+
           } else {
             indexOperator = arrayNumber.indexOf(element);
             prevOperator = Number(arrayNumber.slice(indexOperator - 1, indexOperator));
@@ -223,16 +223,16 @@ function calculate(input) {
             res.value = secondValue;
             // arrayRemoved = arrayNumber.splice(indexOperator -1, 3, firstValue);
             //currentyElement = '/';
-  
+
           }
           break;
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
       }
 
     }
@@ -241,7 +241,7 @@ function calculate(input) {
 
 
 
-    
+
 
 
 
@@ -279,395 +279,4 @@ function calculate(input) {
 
 
   })
-
-
-
-
-
-
-  /*   arrayNumber.forEach((element, index) => {
-      if (element === '+' || element === '-') {
-        switch (element) {
-          case '+':
-            indexOperator = arrayNumber.indexOf(element);
-            prevOperator = Number(arrayNumber.slice(indexOperator - 1, indexOperator));
-            prevOperatorIndex = prevOperator[index];
-            console.log(prevOperatorIndex)
-            nextOperator = Number(arrayNumber.slice(indexOperator + 1, indexOperator + 2));
-            firstValue = prevOperator + nextOperator;
-            // arrayRemoved = arrayNumber.splice(indexOperator -1, 3, firstValue);
-            currentyElement = '+';
-            break;
-          case '-':
-            indexOperator = arrayNumber.indexOf(element);
-            prevOperator = Number(arrayNumber.slice(indexOperator - 1, indexOperator));
-            prevOperatorIndex = prevOperator[index];
-            console.log(prevOperatorIndex)
-            nextOperator = Number(arrayNumber.slice(indexOperator + 1, indexOperator + 2));
-            firstValue = prevOperator - nextOperator;
-            // arrayRemoved = arrayNumber.splice(indexOperator -1, 3, firstValue);
-            currentyElement = '-';
-            break;
-        }
-        res = firstValue;
-
-      }
-
-    }) */
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-let ctt = 0;
-while (ctt < qtdOperators.length) {
-  ctt++
-  if (typeof (element) === "string") {
-
-    if (element === '*') {
-      indexFirstOperator = arrayNumber.indexOf(element);
-
-
-
-    } else if (element === '/') {
-      indexFirstOperator = arrayNumber.indexOf(element);
-
-
-    } else if (element === '+') {
-      indexFirstOperator = arrayNumber.indexOf(element);
-
-
-
-    } else if (element === '-') {
-      indexFirstOperator = arrayNumber.indexOf(element);
-
-
-    }
-
-
-
-
-
-
-
-    if (index !== indexFirstOperator) {
-      console.log(index)
-    } */
-
-
-
-
-// itemNextOperator = Number(arrayNumber.slice(index + 1, index + 2));
-//console.log(`dentro do if diferente ${itemNextOperator}`)
-
-/* console.log(element, itemNextOperator)
-con
-
-
-switch (element !== curr) {
-
-  case '*':
-    firstValue = firstValue * itemNextOperator;
-
-    break;
-
-  case '/':
-    firstValue = firstValue / itemNextOperator
-    break;
-
-  case '+':
-    firstValue = firstValue + itemNextOperator
-    break;
-
-  case '-':
-    firstValue = firstValue - itemNextOperator
-    break;
-}
-result = firstValue;
-res.value = result; */
-
-
-
-
-
-
-
-
-
-
-
-/*  };
-
-}
-
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//console.log(arrayNumber)
-
-//console.log(firstValue)
-//console.log(`andes do operador ${element} : ${itemPrevOperator}`)
-
-
-/* if (qtdOperators.length > 1) {
-  switch (element) {
-    case '-':
-      result = firstValue - itemNextOperator;
-      console.log(firstValue, itemNextOperator)
-      break;
-    case '+':
-      result = firstValue + itemNextOperator;
-      console.log(firstValue, itemNextOperator)
-      break;
-  }
-
-} */
-
-/* if (index === 1) {
-  itemPrevOperator = Number(arrayNumber.slice(0, index));
-  //console.log(`andes do operador ${element} : ${itemPrevOperator}`)
-
-  itemNextOperator = Number(arrayNumber.splice(index + 1, index))
-//  console.log(`depois do operador ${element} : ${itemNextOperator}`)
-
-}else{
-  itemNextOperator = Number(arrayNumber.splice(index + 1, index))
- // console.log(`depois do operador ${element} : ${itemNextOperator}`)
-
-}
-
-
-if (typeof (element) === "string") {
-
-
-
-  switch (element) {
-    case '+':
-      firstValue = itemPrevOperator + itemNextOperator;
-      Array.from(arrayNumber.splice(0, 2, firstValue));
-
-
-      break;
-
-
-  }
-} */
-
-
-
-/*  if (typeof (element) === "string") {
-       
-       
-       //console.log(itemPrevOperator)
-       
-
-       itemNextOperator = arrayNumber.splice(3)
-       //console.log(itemNextOperator)
-       
-       switch (element) {
-         case '+':
-           firstValue = itemPrevOperator + itemNextOperator
-           break;
-
-         case '-':
-           firstValue = itemPrevOperator - itemNextOperator
-           break;
-
-         case '*':
-           firstValue = itemPrevOperator * itemNextOperator
-           break;
-
-         case '/':
-           firstValue = itemPrevOperator / itemNextOperator
-           break;
-       }
-       //console.log(firstValue)
-     }
-     break; */
-
-
-
-/* itemPrevOperator = Number(arrayNumber.slice(0, index))
-//console.log(`o numero antes do ${element} é ${itemPrevOperator}`)
-
-
-itemNextOperator = Number(arrayNumber.slice(index + 1))
-//console.log(`o numero DEPOIS do ${element} é ${itemNextOperator}`) */
-
-
-//console.log(`achei uma string ! ela é  ${element} e seu index é ${index}`)
-
-//    const regex = new RegExp(/[+-/*]/i);
-//const numList = input.split(/['']/i);
-
-/* const regex = new RegExp(/[+-/*]/i);
-      switch (regex.exec(element)[0]) {
-        case '+':
-          const newElement = element.split(/['']/i);
-        
-          break;
-        case '-':
-          console.log('é uma subtração');
-          break;
-        case '/':
-          console.log('divisão');
-          break;
-        case '*':
-          console.log('vezes');
-          break;
-        default:
-          console.error('Operation not found');
-          break;
-      }
- */
-
-
-
-
-
-/* let newArray = Array.from(input)
-let arrayNumber = newArray.map((element, index) => {
-  if (element !== '+' && element !== '-' && element !== '*' && element !== '/') {
-    let numbers = parseInt(element);
-    return numbers;
-  }else{
-    return element;
-  }
-   
-  
-});
-
-console.log(arrayNumber) */
-
-
-
-/* const count = 0
-let itemPrevOperator = ''
-let itemNextOperator = ''
-newArray.forEach((element, index) => {
-  if (element === '+' || element === '-') {
-    itemPrevOperator = newArray.slice(0, index)
-    //newArray.slice(0, index + 1).toString().replace(/,/g, '')
-
-    itemNextOperator = newArray.slice(index + 1, newArray.length)
-    //toString().replace(/,/g, '')
-
-  }
-
-})
-console.log('item antes do', itemPrevOperator)
-console.log('item depois d0', itemNextOperator) */
-
-/* function calculate(input) {
-  let newArray = Array.from(input);
-  let arrayOperator = [];
-  let arrayNumbers = [];
-  
- 
- newArray.map((element, index) => {
-    if( element !== '+' && element !== '-' && element !== '*' && element !== '/'){
-      arrayOperator.push(element);
-    }else{
-      arrayNumbers.push(element)
-    }
-  })
-  
-
-
-  console.log(newArray2)
- 
-
-
-} */
-
-
-/*   let newArray = Array.from(input)
-  console.log(newArray)
-  let count = 0
-  newArray.forEach((element, index) => {
-    if (element === '+') {
-      count = Number(newArray.slice(0, index).toString().replace(/,/g, '')) ;
-    }
-  })
-  console.log(count) */
-/* function calculate(input) {
-  let newArray = input.split('');
-  let arrayNumbers = []
-  newArray.map(element => {
-    if(element !== '-'){
-      arrayNumbers.push(element)
-
-
-    }if (element !== '+') {
-      arrayNumbers.push(element)
-      
-    } else {
-      console.log
-      
-    }
-  });
-  console.log(arrayNumbers)
-
-
-
-
-
- //let select = input.match(/\W|_/g); 
-  // let select2 = select.match(/[\\"]/g);
-  //console.log(select)
-  //newArray.forEach(element => {
-
-  //let select = element.match(/\W|_/g); 
-
-  //let newstring = select.replace('', "");
-  // console.log(newstring)
-  //elementlet semCaracter = Array.from(newstring);
-
-
-
-  // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-} */
