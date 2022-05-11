@@ -102,19 +102,9 @@ function calculate(input) {
   let afterOperator = '';
   let newArray = Array.from(input);
   
-  let filteredArray = newArray.map((element, index) => {
-    if (element !== '+' && element !== '-' && element !== '*' && element !== '/') {
-      let numbers = Number(element);
-      return numbers;
-    } else {
-      return element
-
-    }
-  });
-
-  let qtdOperators = filteredArray.filter(element => typeof (element) === "string");
-  
-  let treatedArray = concatNumber(filteredArray);
+  let arrayTransformed = transformArray(newArray);
+  let qtdOperators = countOperators(arrayTransformed);
+  let treatedArray = concatNumber(arrayTransformed);
 
   treatedArray.forEach(element => {
     ctt = 0
@@ -151,6 +141,24 @@ function calculate(input) {
     }
     resultFinal.value = result;
   });
+}
+
+function transformArray(newArray) {
+  let transformedArray = newArray.map((element, index) => {
+    if (element !== '+' && element !== '-' && element !== '*' && element !== '/') {
+      let numbers = Number(element);
+      return numbers;
+    } else {
+      return element
+    }
+  });
+  return transformedArray;
+}
+
+function countOperators(arrayTransformed) {
+  let qtdOperators = arrayTransformed.filter(element => typeof (element) === "string");
+  return qtdOperators.length;
+
 }
 
 function concatNumber(treatedArray) {
