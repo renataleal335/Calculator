@@ -95,69 +95,84 @@ function changeTheme() {
 
 // 1+2-3*4/3
 
-
 function calculate(input) {
-  let res = document.getElementById("result");
+  let resultFinal = document.getElementById("result");
   let result = '';
-  let newArray = Array.from(input);
   let beforeOperator = '';
-  let indexBeforeOp = '';
   let afterOperator = '';
+  let newArray = Array.from(input);
   
-  let arrayNumber = newArray.map((element, index) => {
-      if (element !== '+' && element !== '-' && element !== '*' && element !== '/') {
-          let numbers = Number(element);
-          return numbers;
-      } else {
-          return element
+  let arrayTransformed = transformArray(newArray);
+  let qtdOperators = countOperators(arrayTransformed);
+  let treatedArray = concatNumber(arrayTransformed);
+
+  treatedArray.forEach(element => {
+    ctt = 0
+    while (ctt < qtdOperators.length) {
+      ctt++
+      if (treatedArray.includes('/')) {
+        let index = treatedArray.indexOf('/')
+        beforeOperator = treatedArray.at(index - 1);
+        afterOperator = treatedArray.at(index + 1);
+        result = beforeOperator / afterOperator;
+        treatedArray.splice(index - 1, 3, result);
+
+      } else if (treatedArray.includes('*')) {
+        let index = treatedArray.indexOf('*')
+        beforeOperator = treatedArray.at(index - 1);
+        afterOperator = treatedArray.at(index + 1);
+        result = beforeOperator * afterOperator;
+        treatedArray.splice(index - 1, 3, result);
+
+      } else if (treatedArray.includes('-')) {
+        let index = treatedArray.indexOf('-')
+        beforeOperator = treatedArray.at(index - 1);
+        afterOperator = treatedArray.at(index + 1);
+        result = beforeOperator - afterOperator;
+        treatedArray.splice(index - 1, 3, result);
+      } else if (treatedArray.includes('+')) {
+        let index = treatedArray.indexOf('+')
+        beforeOperator = treatedArray.at(index - 1);
+        afterOperator = treatedArray.at(index + 1);
+        result = beforeOperator + afterOperator;
+        treatedArray.splice(index - 1, 3, result);
 
       }
+    }
+    resultFinal.value = result;
   });
+}
 
-  let qtdOperators = arrayNumber.filter(element => typeof (element) === "string");
-
-  arrayNumber.forEach(element => {
-      ctt = 0
-      while (ctt < qtdOperators.length) {
-          ctt++
-          if (arrayNumber.includes('/')) {
-              let index = arrayNumber.indexOf('/')
-              beforeOperator = arrayNumber.at(index - 1);
-              afterOperator = arrayNumber.at(index + 1);
-              indexBeforeOp = arrayNumber.indexOf(beforeOperator);
-              result = beforeOperator / afterOperator;
-              arrayNumber.splice(indexBeforeOp, 3, result);
-
-          } else if (arrayNumber.includes('*')) {
-              let index = arrayNumber.indexOf('*')
-              beforeOperator = arrayNumber.at(index - 1);
-              afterOperator = arrayNumber.at(index + 1);
-              indexBeforeOp = arrayNumber.indexOf(beforeOperator);
-              result = beforeOperator * afterOperator;
-              arrayNumber.splice(indexBeforeOp, 3, result);
-
-          } else if (arrayNumber.includes('-')) {
-              let index = arrayNumber.indexOf('-')
-              beforeOperator = arrayNumber.at(index - 1);
-              afterOperator = arrayNumber.at(index + 1);
-              indexBeforeOp = arrayNumber.indexOf(beforeOperator);
-              result = beforeOperator - afterOperator;
-              arrayNumber.splice(indexBeforeOp, 3, result);
-          } else if (arrayNumber.includes('+')) {
-              let index = arrayNumber.indexOf('+')
-              beforeOperator = arrayNumber.at(index - 1);
-              afterOperator = arrayNumber.at(index + 1);
-              indexBeforeOp = arrayNumber.indexOf(beforeOperator);
-              result = beforeOperator + afterOperator;
-              arrayNumber.splice(indexBeforeOp, 3, result);
-
-          }
-
-
-
-      }
-      res.value = result;
+function transformArray(newArray) {
+  let transformedArray = newArray.map((element, index) => {
+    if (element !== '+' && element !== '-' && element !== '*' && element !== '/') {
+      let numbers = Number(element);
+      return numbers;
+    } else {
+      return element
+    }
   });
+  return transformedArray;
+}
 
+function countOperators(arrayTransformed) {
+  let qtdOperators = arrayTransformed.filter(element => typeof (element) === "string");
+  return qtdOperators.length;
 
+}
+
+function concatNumber(treatedArray) {
+  let currentNumber = [];
+  let arrayConcat = [];
+  treatedArray.forEach((element, index) => {
+    if (typeof (element) === "number") {
+      currentNumber.push(element)
+    } else {
+      arrayConcat.push(Number(currentNumber.join('')));
+      arrayConcat.push(element);
+      currentNumber = [];
+    }
+  });
+  arrayConcat.push(Number(currentNumber.join('')));
+  return arrayConcat;
 }
