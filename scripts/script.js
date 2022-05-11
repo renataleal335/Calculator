@@ -97,186 +97,67 @@ function changeTheme() {
 
 
 function calculate(input) {
-  let firstValue = 0;
-  let secondValue = 0;
-  let result = '';
-  let prevOperator = '';
-  let nextOperator = '';
   let res = document.getElementById("result");
+  let result = '';
   let newArray = Array.from(input);
-  let indexOperator = '';
-  let primeirasOp = false;
-  let resultFirstOp = 0;
-
+  let beforeOperator = '';
+  let indexBeforeOp = '';
+  let afterOperator = '';
+  
   let arrayNumber = newArray.map((element, index) => {
-    if (element !== '+' && element !== '-' && element !== '*' && element !== '/') {
-      let numbers = parseInt(element);
-      return numbers;
-    } else {
-      return element
+      if (element !== '+' && element !== '-' && element !== '*' && element !== '/') {
+          let numbers = Number(element);
+          return numbers;
+      } else {
+          return element
 
-    }
+      }
   });
 
   let qtdOperators = arrayNumber.filter(element => typeof (element) === "string");
 
-  console.log(arrayNumber)
-
   arrayNumber.forEach(element => {
+      ctt = 0
+      while (ctt < qtdOperators.length) {
+          ctt++
+          if (arrayNumber.includes('/')) {
+              let index = arrayNumber.indexOf('/')
+              beforeOperator = arrayNumber.at(index - 1);
+              afterOperator = arrayNumber.at(index + 1);
+              indexBeforeOp = arrayNumber.indexOf(beforeOperator);
+              result = beforeOperator / afterOperator;
+              arrayNumber.splice(indexBeforeOp, 3, result);
 
-    if (arrayNumber.includes('/') || arrayNumber.includes('*')) {
-      primeirasOp = true;
+          } else if (arrayNumber.includes('*')) {
+              let index = arrayNumber.indexOf('*')
+              beforeOperator = arrayNumber.at(index - 1);
+              afterOperator = arrayNumber.at(index + 1);
+              indexBeforeOp = arrayNumber.indexOf(beforeOperator);
+              result = beforeOperator * afterOperator;
+              arrayNumber.splice(indexBeforeOp, 3, result);
 
-    } else {
-      primeirasOp = false;
-
-    }
-
-    if (primeirasOp) {
-      switch (element) {
-        case '*':
-          if (firstValue) {
-            indexOperator = arrayNumber.indexOf(element);
-            nextOperator = Number(arrayNumber.slice(indexOperator + 1, indexOperator + 2));
-            firstValue = firstValue * nextOperator;
-            // arrayRemoved = arrayNumber.splice(indexOperator - 1, 3, firstValue)
-            // currentyElement = '*';
-
-
-          } else {
-            indexOperator = arrayNumber.indexOf(element);
-            prevOperator = Number(arrayNumber.slice(indexOperator - 1, indexOperator));
-            nextOperator = Number(arrayNumber.slice(indexOperator + 1, indexOperator + 2));
-            firstValue = prevOperator * nextOperator;
-            res.value = firstValue;
-            // arrayRemoved = arrayNumber.splice(indexOperator - 1, 3, firstValue)
-            // currentyElement = '*';
-
-          }
-          break;
-        case '/':
-          if (firstValue) {
-            indexOperator = arrayNumber.indexOf(element);
-            nextOperator = Number(arrayNumber.slice(indexOperator + 1, indexOperator + 2));
-            firstValue = firstValue / nextOperator;
-            resultFirstOp = firstValue;
-            res.value = resultFirstOp;
-          } else {
-            indexOperator = arrayNumber.indexOf(element);
-            prevOperator = Number(arrayNumber.slice(indexOperator - 1, indexOperator));
-            nextOperator = Number(arrayNumber.slice(indexOperator + 1, indexOperator + 2));
-            firstValue = prevOperator / nextOperator;
-            resultFirstOp = firstValue;
-            res.value = firstValue;
-            //primeirasOp = false;
-            // arrayRemoved = arrayNumber.splice(indexOperator -1, 3, firstValue);
-
+          } else if (arrayNumber.includes('-')) {
+              let index = arrayNumber.indexOf('-')
+              beforeOperator = arrayNumber.at(index - 1);
+              afterOperator = arrayNumber.at(index + 1);
+              indexBeforeOp = arrayNumber.indexOf(beforeOperator);
+              result = beforeOperator - afterOperator;
+              arrayNumber.splice(indexBeforeOp, 3, result);
+          } else if (arrayNumber.includes('+')) {
+              let index = arrayNumber.indexOf('+')
+              beforeOperator = arrayNumber.at(index - 1);
+              afterOperator = arrayNumber.at(index + 1);
+              indexBeforeOp = arrayNumber.indexOf(beforeOperator);
+              result = beforeOperator + afterOperator;
+              arrayNumber.splice(indexBeforeOp, 3, result);
 
           }
-
-          break;
 
 
 
       }
+      res.value = result;
+  });
 
 
-    } else {
-
-      switch (element) {
-        case '+':
-          if (secondValue) {
-            indexOperator = arrayNumber.indexOf(element);
-            prevOperator = secondValue;
-            nextOperator = resultFirstOp;
-            secondValue = prevOperator + nextOperator;
-            res.value = secondValue;
-            //currentyElement = '/';
-
-
-          } else {
-            indexOperator = arrayNumber.indexOf(element);
-            prevOperator = Number(arrayNumber.slice(indexOperator - 1, indexOperator));
-            nextOperator = Number(arrayNumber.slice(indexOperator + 1, indexOperator + 2));
-            secondValue = prevOperator + nextOperator;
-            res.value = secondValue;
-            // arrayRemoved = arrayNumber.splice(indexOperator -1, 3, firstValue);
-            //currentyElement = '/';
-
-          }
-          break;
-        case '-':
-          if (secondValue) {
-            indexOperator = arrayNumber.indexOf(element);
-            prevOperator = secondValue;
-            nextOperator = resultFirstOp;
-            secondValue = prevOperator - nextOperator;
-            res.value = secondValue;
-            //currentyElement = '/';
-
-
-          } else {
-            indexOperator = arrayNumber.indexOf(element);
-            prevOperator = Number(arrayNumber.slice(indexOperator - 1, indexOperator));
-            nextOperator = Number(arrayNumber.slice(indexOperator + 1, indexOperator + 2));
-            secondValue = prevOperator - nextOperator;
-            res.value = secondValue;
-            // arrayRemoved = arrayNumber.splice(indexOperator -1, 3, firstValue);
-            //currentyElement = '/';
-
-          }
-          break;
-
-
-
-
-
-
-
-      }
-
-    }
-
-
-
-
-
-
-
-
-
-    res.value = secondValue;
-    res.value = firstValue;
-
-
-
-
-
-    console.log(secondValue)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  })
 }

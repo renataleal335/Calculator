@@ -14,7 +14,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(228, 142, 199);
+  background-color: rgb(245, 206, 206);
   transition: 0.8s all;
 }
 h1 {
@@ -55,7 +55,7 @@ input[type="text"] {
   width: 218px;
 }
 input[type="button"]:hover {
-  background-color: rgb(218, 54, 177);
+  background-color: rgb(244, 183, 183);
   color: #fff;
 }
 #clear {
