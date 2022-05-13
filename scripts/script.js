@@ -159,10 +159,15 @@ function concatNumber(treatedArray) {
       }
     } else {
       if (index === 0) {
+        if (element === '*' || element === '/') {
+          resultFinal.value = "Invalid expression!"
+          throw new Error("Invalid expression!")
+        }
+      }
+      if (index === 0) {
         if (element === '-' || element === '+' && index === 0) {
           arrayConcat.push(Number(currentNumber.join('')));
           arrayConcat.push(element);
-          //adc 0 e elemento ex: 0 - 
         }
       } else {
         if (element === '-' || element === '+' || element === '*' || element === '/') {
@@ -185,7 +190,6 @@ function concatNumber(treatedArray) {
   });
   arrayConcat.push(Number(currentNumber.join('')));
   return arrayConcat;
-
 }
 
 function calculate(input) {
@@ -194,50 +198,50 @@ function calculate(input) {
   let beforeOperator = '';
   let afterOperator = '';
   let newArray = Array.from(input);
-  
+
   const arrayTransformed = transformArray(newArray);
   const negativeNum = negativeNumber(arrayTransformed);
   const qtdOperators = countOperators(arrayTransformed);
   const treatedArray = concatNumber(arrayTransformed);
-  
 
   treatedArray.forEach((element, index) => {
-    let ctt = 0
-    while (ctt < qtdOperators) {
-      ctt++
-      if (treatedArray.includes('/')) {
-        let index = treatedArray.indexOf('/')
-        beforeOperator = treatedArray.at(index - 1);
-        afterOperator = treatedArray.at(index + 1);
-        result = beforeOperator / afterOperator;
-        treatedArray.splice(index - 1, 3, result);
+    try {
+      let ctt = 0
+      while (ctt < qtdOperators) {
+        ctt++
+        if (treatedArray.includes('/')) {
+          let index = treatedArray.indexOf('/')
+          beforeOperator = treatedArray.at(index - 1);
+          afterOperator = treatedArray.at(index + 1);
+          result = beforeOperator / afterOperator;
+          treatedArray.splice(index - 1, 3, result);
 
-      } else if (treatedArray.includes('*')) {
-        let index = treatedArray.indexOf('*')
-        beforeOperator = treatedArray.at(index - 1);
-        afterOperator = treatedArray.at(index + 1);
-        result = beforeOperator * afterOperator;
-        treatedArray.splice(index - 1, 3, result);
+        } else if (treatedArray.includes('*')) {
+          let index = treatedArray.indexOf('*')
+          beforeOperator = treatedArray.at(index - 1);
+          afterOperator = treatedArray.at(index + 1);
+          result = beforeOperator * afterOperator;
+          treatedArray.splice(index - 1, 3, result);
 
-      } else if (treatedArray.includes('-')) {
-        let index = treatedArray.indexOf('-')
-        beforeOperator = treatedArray.at(index - 1);
-        afterOperator = treatedArray.at(index + 1);
-        result = beforeOperator - afterOperator;
-        treatedArray.splice(index - 1, 3, result);
-      } else if (treatedArray.includes('+')) {
-        let index = treatedArray.indexOf('+')
-        beforeOperator = treatedArray.at(index - 1);
-        afterOperator = treatedArray.at(index + 1);
-        result = beforeOperator + afterOperator;
-        treatedArray.splice(index - 1, 3, result);
+        } else if (treatedArray.includes('-')) {
+          let index = treatedArray.indexOf('-')
+          beforeOperator = treatedArray.at(index - 1);
+          afterOperator = treatedArray.at(index + 1);
+          result = beforeOperator - afterOperator;
+          treatedArray.splice(index - 1, 3, result);
+        } else if (treatedArray.includes('+')) {
+          let index = treatedArray.indexOf('+')
+          beforeOperator = treatedArray.at(index - 1);
+          afterOperator = treatedArray.at(index + 1);
+          result = beforeOperator + afterOperator;
+          treatedArray.splice(index - 1, 3, result);
 
+        }
+        resultFinal.value = result;
       }
-      resultFinal.value = result;
+    } catch (err) {
+      resultFinal.value = err;
     }
-
   });
   return resultFinal.value;
 }
-
-
