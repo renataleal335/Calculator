@@ -95,16 +95,6 @@ function changeTheme() {
 
 // 1+2-3*4/3
 
-function invalidExpression(index) {
-  if (index === 0) {
-    if (element === '/' || element === '*') {
-      resultFinal.value = "Invalid expression!"
-      qtdOperators = 0;
-    }
-  }
-
-}
-
 function transformArray(newArray) {
   let transformedArray = newArray.map((element, index) => {
     if (element !== '+' && element !== '-' && element !== '*' && element !== '/') {
@@ -240,7 +230,7 @@ function calculate(input) {
         resultFinal.value = result;
       }
     } catch (err) {
-      resultFinal.value = err;
+      return resultFinal.value = err;
     }
   });
   return resultFinal.value;
