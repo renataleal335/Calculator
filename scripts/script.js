@@ -230,7 +230,7 @@ function calculate(input) {
         resultFinal.value = result;
       }
     } catch (err) {
-      resultFinal.value = err;
+      return resultFinal.value = err;
     }
   });
   return resultFinal.value;
