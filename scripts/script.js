@@ -95,6 +95,99 @@ function changeTheme() {
 
 // 1+2-3*4/3
 
+function invalidExpression(index) {
+  if (index === 0) {
+    if (element === '/' || element === '*') {
+      resultFinal.value = "Invalid expression!"
+      qtdOperators = 0;
+    }
+  }
+
+}
+
+function transformArray(newArray) {
+  let transformedArray = newArray.map((element, index) => {
+    if (element !== '+' && element !== '-' && element !== '*' && element !== '/') {
+      let numbers = Number(element);
+      return numbers;
+    } else {
+      return element
+    }
+  });
+  return transformedArray;
+}
+
+function countOperators(arrayTransformed) {
+  let qtdOperators = arrayTransformed.filter(element => typeof (element) === "string");
+  return qtdOperators.length;
+}
+
+function negativeNumber(arrayTransformed) {
+  let currentElement = '';
+  let nextElement = '';
+  let negativeNumber = 0;
+  let newNegativenumber = 0
+  arrayTransformed.forEach((element, index) => {
+    currentElement = arrayTransformed.at(index);
+    nextElement = arrayTransformed.at(index + 1);
+    if (typeof (element) === "string" && typeof (currentElement) === typeof (nextElement)) {
+      if (nextElement === '-') {
+        negativeNumber = arrayTransformed.at(index + 2);
+        newNegativenumber = negativeNumber * (-1);
+        arrayTransformed.splice(index + 1, 2, newNegativenumber);
+      }
+    }
+  });
+  return arrayTransformed;
+}
+
+function concatNumber(treatedArray) {
+  let currentNumber = [];
+  let arrayConcat = [];
+  let nextElement = '';
+  let prevElement = '';
+  let resultFinal = document.getElementById("result");
+
+  treatedArray.forEach((element, index) => {
+    nextElement = treatedArray.at(index + 1);
+    prevElement = treatedArray.at(index - 1);
+    if (typeof (element) === "number") {
+      if (typeof (prevElement) === "string" && typeof (nextElement) === "string") {
+        arrayConcat.push(element);
+      } else {
+        currentNumber.push(element);
+      }
+    } else {
+      if (index === 0) {
+        if (element === '-' || element === '+' && index === 0) {
+          arrayConcat.push(Number(currentNumber.join('')));
+          arrayConcat.push(element);
+          //adc 0 e elemento ex: 0 - 
+        }
+      } else {
+        if (element === '-' || element === '+' || element === '*' || element === '/') {
+          if (currentNumber.length > 1) {
+            arrayConcat.push(Number(currentNumber.join('')));
+            arrayConcat.push(element);
+          } else {
+            if (currentNumber.length === 1) {
+              arrayConcat.push(Number(currentNumber));
+            }
+            arrayConcat.push(element);
+          }
+        }
+      }
+      if (typeof (nextElement) === "string") {
+        arrayConcat.push(element);
+      }
+      currentNumber = [];
+    }
+  });
+  arrayConcat.push(Number(currentNumber.join('')));
+  return arrayConcat;
+
+}
+
 function calculate(input) {
   let resultFinal = document.getElementById("result");
   let result = '';
@@ -102,13 +195,15 @@ function calculate(input) {
   let afterOperator = '';
   let newArray = Array.from(input);
   
-  let arrayTransformed = transformArray(newArray);
-  let qtdOperators = countOperators(arrayTransformed);
-  let treatedArray = concatNumber(arrayTransformed);
+  const arrayTransformed = transformArray(newArray);
+  const negativeNum = negativeNumber(arrayTransformed);
+  const qtdOperators = countOperators(arrayTransformed);
+  const treatedArray = concatNumber(arrayTransformed);
+  
 
-  treatedArray.forEach(element => {
-    ctt = 0
-    while (ctt < qtdOperators.length) {
+  treatedArray.forEach((element, index) => {
+    let ctt = 0
+    while (ctt < qtdOperators) {
       ctt++
       if (treatedArray.includes('/')) {
         let index = treatedArray.indexOf('/')
@@ -138,41 +233,11 @@ function calculate(input) {
         treatedArray.splice(index - 1, 3, result);
 
       }
+      resultFinal.value = result;
     }
-    resultFinal.value = result;
+
   });
+  return resultFinal.value;
 }
 
-function transformArray(newArray) {
-  let transformedArray = newArray.map((element, index) => {
-    if (element !== '+' && element !== '-' && element !== '*' && element !== '/') {
-      let numbers = Number(element);
-      return numbers;
-    } else {
-      return element
-    }
-  });
-  return transformedArray;
-}
 
-function countOperators(arrayTransformed) {
-  let qtdOperators = arrayTransformed.filter(element => typeof (element) === "string");
-  return qtdOperators.length;
-
-}
-
-function concatNumber(treatedArray) {
-  let currentNumber = [];
-  let arrayConcat = [];
-  treatedArray.forEach((element, index) => {
-    if (typeof (element) === "number") {
-      currentNumber.push(element)
-    } else {
-      arrayConcat.push(Number(currentNumber.join('')));
-      arrayConcat.push(element);
-      currentNumber = [];
-    }
-  });
-  arrayConcat.push(Number(currentNumber.join('')));
-  return arrayConcat;
-}
