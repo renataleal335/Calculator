@@ -155,7 +155,7 @@ function concatNumber(treatedArray) {
         }
       }
       if (index === 0) {
-        if (element === '-' || element === '+' && index === 0) {
+        if (element === '-' || element === '+') {
           arrayConcat.push(Number(currentNumber.join('')));
           arrayConcat.push(element);
         }
@@ -194,7 +194,7 @@ function calculate(input) {
   const qtdOperators = countOperators(arrayTransformed);
   const treatedArray = concatNumber(arrayTransformed);
 
-  treatedArray.forEach((element, index) => {
+  treatedArray.forEach((element) => {
     try {
       let ctt = 0
       while (ctt < qtdOperators) {
