@@ -159,6 +159,15 @@ class Token {
             throw new Error("Invalid expression!")
           }
         }
+        if (typeof (element) === "string" && typeof (nextElement) === "string") {
+          resultFinal.value = "Invalid expression!"
+          throw new Error("Invalid expression!")
+
+        }
+        if (element === '/' && (nextElement === 0 || nextElement === undefined)) {
+          resultFinal.value = "Invalid expression!"
+          throw new Error("Invalid expression!")
+        }
         if (index === 0) {
           if (element === '-' || element === '+') {
             arrayConcat.push(Number(currentNumber.join('')));
@@ -211,50 +220,55 @@ class Calculator extends Token {
     let beforeOperator = '';
     let afterOperator = '';
     treatedArray.forEach(() => {
-      try {
-        let ctt = 0
-        while (ctt < operators) {
-          ctt++
-          if (treatedArray.includes('/')) {
-            let index = treatedArray.indexOf('/')
-            beforeOperator = treatedArray.at(index - 1);
-            afterOperator = treatedArray.at(index + 1);
-            result = beforeOperator / afterOperator;
-            treatedArray.splice(index - 1, 3, result);
 
-          } else if (treatedArray.includes('*')) {
-            let index = treatedArray.indexOf('*')
-            beforeOperator = treatedArray.at(index - 1);
-            afterOperator = treatedArray.at(index + 1);
-            result = beforeOperator * afterOperator;
-            treatedArray.splice(index - 1, 3, result);
+      let ctt = 0
+      while (ctt < operators) {
+        ctt++
+        if (treatedArray.includes('/')) {
+          let index = treatedArray.indexOf('/')
+          beforeOperator = treatedArray.at(index - 1);
+          afterOperator = treatedArray.at(index + 1);
+          result = beforeOperator / afterOperator;
+          treatedArray.splice(index - 1, 3, result);
 
-          } else if (treatedArray.includes('-')) {
-            let index = treatedArray.indexOf('-')
-            beforeOperator = treatedArray.at(index - 1);
-            afterOperator = treatedArray.at(index + 1);
-            result = beforeOperator - afterOperator;
-            treatedArray.splice(index - 1, 3, result);
-          } else if (treatedArray.includes('+')) {
-            let index = treatedArray.indexOf('+')
-            beforeOperator = treatedArray.at(index - 1);
-            afterOperator = treatedArray.at(index + 1);
-            result = beforeOperator + afterOperator;
-            treatedArray.splice(index - 1, 3, result);
+        } else if (treatedArray.includes('*')) {
+          let index = treatedArray.indexOf('*')
+          beforeOperator = treatedArray.at(index - 1);
+          afterOperator = treatedArray.at(index + 1);
+          result = beforeOperator * afterOperator;
+          treatedArray.splice(index - 1, 3, result);
 
-          }
-          resultFinal.value = result;
+        } else if (treatedArray.includes('-')) {
+          let index = treatedArray.indexOf('-')
+          beforeOperator = treatedArray.at(index - 1);
+          afterOperator = treatedArray.at(index + 1);
+          result = beforeOperator - afterOperator;
+          treatedArray.splice(index - 1, 3, result);
+        } else if (treatedArray.includes('+')) {
+          let index = treatedArray.indexOf('+')
+          beforeOperator = treatedArray.at(index - 1);
+          afterOperator = treatedArray.at(index + 1);
+          result = beforeOperator + afterOperator;
+          treatedArray.splice(index - 1, 3, result);
+
         }
-      } catch (err) {
-        return resultFinal.value = err;
+
+        resultFinal.value = result;
       }
+
     });
     return resultFinal.value;
   }
 }
 
 function calculate(input) {
-  const tokens = new Token(input)._treatedArray();
-  const result = new Calculator(tokens)._calculateValue();
-  return result;
+  try {
+    const tokens = new Token(input)._treatedArray();
+    const result = new Calculator(tokens)._calculateValue();
+    return result;
+
+  } catch (err) {
+    return result = err;
+  }
+
 }
